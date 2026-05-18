@@ -1,0 +1,21 @@
+@page
+@model nIKernel.Pages.IndexModel
+@{
+    ViewData["Title"] = "Página Inicial";
+}
+
+<div class="container mt-5">
+    <div class="text-center">
+        <h1>Menu</h1>
+        <h1 class="display-4">Bem-vindo ao nIKernel!</h1>
+        <p class="lead">Você está conectado. Utilize o menu ou acesse as rotas para navegar no sistema.</p>
+        
+        <div class="mt-4">
+            <a asp-page="/Admin/Usuarios/Index" class="btn btn-primary m-2">Ir para Usuários</a>
+            <a asp-page="/Admin/Perfis/Index" class="btn btn-primary m-2">Ir para Perfis</a>
+            <a asp-page="/Admin/Conectados/Index" class="btn btn-primary m-2">Ir para Conectados</a>
+            <a asp-page="/Produtos/Index" class="btn btn-primary m-2">Ir para Produtos</a> 
+            <a asp-page="/Clientes/Index" class="btn btn-primary m-2">Ir para Clientes</a>
+        </div>
+    </div>
+</div>

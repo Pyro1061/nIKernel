@@ -1,0 +1,57 @@
+@page
+@using nIKernel.Models.Cliente
+@model nIKernel.Pages.Clientes.IndexModel
+
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<br>
+<h2>Lista de Clientes</h2>
+
+
+<p class="btn btn-primary px-5"
+   onclick="window.location.href='@Url.Page("/Index")'"> Voltar para o Menu
+</p>
+
+<br><br>
+<a class="btn btn-primary px-5" asp-page="Criar">
+    Novo Cliente
+</a>
+
+@if (!Model.Clientes.Any())
+{
+    <p>Nenhum cliente encontrado.</p><br>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>CPF/CNPJ</th>
+                <th>RG/IE</th>
+                <th>Nome</th>
+                <th>Apelido</th>
+                <th>Status</th>
+                <th>Data de inclusão</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var cliente in Model.Clientes)
+        {
+            <tr >
+                <td>@cliente.CL_id</td>
+                <td>@cliente.CL_cpf_cnpj</td>
+                <td>@cliente.CL_rg_ie</td>
+                <td>@cliente.CL_nome</td>
+                <td>@cliente.CL_apelido</td>
+                <td>@cliente.CL_status</td>
+                <td>@cliente.CL_data_inclusao</td>
+                <td> <a asp-page="Editar" asp-route-id="@cliente.CL_id" class="btn btn-sm btn-warning">Editar</a> </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
