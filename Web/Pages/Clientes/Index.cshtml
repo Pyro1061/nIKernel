@@ -4,6 +4,14 @@
 
 @{
     ViewData["Title"] = "Clientes";
+    
+    var claimClientes = User.FindFirst(type: "Permissao_Clientes")?.Value;
+    var permissoes = string.IsNullOrEmpty(claimClientes)
+            ? new string[] { "N", "N", "N", "N" }
+        : claimClientes.Split(',');    
+    bool podeInserir = permissoes.Length > 1 && permissoes[1].Trim().ToUpper() == "S";
+    bool podeAtualizar = permissoes.Length > 2 && permissoes[2].Trim().ToUpper() == "S";
+    bool podeDeletar = permissoes.Length > 3 && permissoes[3].Trim().ToUpper() == "S";
 }
 
 <br>

@@ -4,10 +4,11 @@
 @{
     ViewData["Title"] = "Gerenciar Perfis";
 
-    var claimPerfils = User.FindFirst("Permissao_Perfis")?.Value;
+    var claimPerfils = User.FindFirst(type: "Permissao_Perfis")?.Value;
     var permissoes = string.IsNullOrEmpty(claimPerfils)
         ? new string[] { "N", "N", "N", "N" }
-    : claimPerfils.Split(',');    bool podeInserir = permissoes.Length > 1 && permissoes[1].Trim().ToUpper() == "S";
+    : claimPerfils.Split(',');    
+    bool podeInserir = permissoes.Length > 1 && permissoes[1].Trim().ToUpper() == "S";
     bool podeAtualizar = permissoes.Length > 2 && permissoes[2].Trim().ToUpper() == "S";
     bool podeDeletar = permissoes.Length > 3 && permissoes[3].Trim().ToUpper() == "S";
 }
