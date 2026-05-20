@@ -30,14 +30,14 @@
         <table class="table table-striped table-hover mb-0">
             <thead class="table-dark">
                 <tr>
-                        <th width="5%">ID</th>
+                        <th>ID</th>
                         <th>CPF/CNPJ</th>
                         <th>RG/IE</th>
                         <th>Nome</th>
                         <th>Apelido</th>
-                        <th  width="15%" class="text-center">Status</th>
+                        <th width="15%" class="text-center">Status</th>
                         <th>Data de inclusão</th>
-                        <th width="15%" class="text-end">Ações</th>
+                        <th class="text-end">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,8 +56,10 @@
                             <td class="align-middle text-center">
                                 @if (cliente.CL_status == "A") {
                                     <span class="badge bg-success">Ativo</span>
-                                } else {
+                                } else if (cliente.CL_status == "I"){
                                     <span class="badge bg-secondary">Inativo</span>
+                                } else {
+                                    <span class="badge bg-danger">Bloqueado</span>
                                 }
                             </td>
                             <td class="align-middle">@cliente.CL_data_inclusao</td>
@@ -78,4 +80,11 @@
         </table>
     </div>
 </div>
+
+
+
+
+
+
+
 
