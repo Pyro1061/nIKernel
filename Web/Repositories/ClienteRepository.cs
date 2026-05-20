@@ -26,7 +26,11 @@ namespace nIKernel.Repositories
             using var db = new MySqlConnection(_connectionString);
 
             cliente.CL_data_inclusao = DateTime.Now;
-            cliente.CL_status = "A";
+            if (cliente.CL_status == null || cliente.CL_status == "")
+            {
+                cliente.CL_status= "A";
+            }
+             
 
             string sql = @"INSERT INTO TB_CL_CLIENTES 
                 (CL_cpf_cnpj, CL_rg_ie, CL_nome, CL_apelido, CL_status, CL_data_inclusao) 
