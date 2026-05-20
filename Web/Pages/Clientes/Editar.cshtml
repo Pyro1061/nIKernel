@@ -18,6 +18,16 @@
             <input type="hidden" asp-for="Cliente.CL_id" />
             <input type="hidden" asp-for="Cliente.CL_data_inclusao" />
 
+             <div class="row border-bottom pb-3 mb-3">
+                <div class="col-md-2">
+                    <label class="form-label text-muted">ID do Cliente</label>
+                    <input class="form-control bg-light" value="@Model.Cliente.CL_id" disabled />
+                </div>
+                <div class="col-md-10 d-flex align-items-end">
+                    <p class="text-muted mb-2 small"><i class="bi bi-info-circle"></i> O número de identificação do cliente não pode ser alterado.</p>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="Cliente.CL_nome" class="form-label fw-bold">Nome Completo</label>
@@ -31,8 +41,8 @@
 
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label asp-for="Cliente.CL_status" class="form-label fw-bold" >Status</label>
-                    <select asp-for="Cliente.CL_status" class="form-control">
+                    <label asp-for="Cliente.CL_status" class="form-label fw-bold">Status</label>
+                    <select asp-for="Cliente.CL_status" class="form-select">
                         <option value="A">Ativo</option>
                         <option value="I">Inativo</option>
                         <option value="B">Bloqueado</option>
@@ -50,17 +60,11 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-end mt-3">
-                <button type="submit" class="btn btn-primary px-5"> Salvar Alterações</button>
+            <div class="d-flex justify-content-end mt-2">
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="bi bi-save">Salvar Alterações</i>
+                </button>
             </div>
-
-            <button type="submit"
-                asp-page-handler="Deletar"
-                asp-route-id="@Model.Cliente.CL_id"
-                class="btn btn-danger"
-                onclick="return confirm('Tem certeza que deseja deletar este cliente?');">
-                Deletar
-            </button>
         </form>
     </div>
 </div>

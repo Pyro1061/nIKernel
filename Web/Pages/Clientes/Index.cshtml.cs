@@ -29,6 +29,17 @@ namespace nIKernel.Pages.Clientes
             Clientes = await _clienteRepo.ListarTodosAsync();
             return Page();
         }
+        public async Task<IActionResult> OnPostDeletarAsync(int id)
+        {
+            var claim = User.FindFirst("Permissao_Clientes")?.Value;
 
+            // Excluir
+            if (string.IsNullOrEmpty(claim) || claim.Split(',')[3] != "S")
+            {
+                return RedirectToPage("/Index");
+            }
+            await _clienteRepo.DeletarAsync(id);
+            return RedirectToPage("/Clientes/Index");
+        }
     }
 }
