@@ -23,5 +23,33 @@ namespace nIKernel.Models.Cliente
         public string CL_status { get; set; } = "A";
 
         public DateTime CL_data_inclusao {get; set;}
-    }
+
+        // ENDEREÇO DE CLIENTE 
+        [Required(ErrorMessage = "O CEP é obrigatório.")]
+        [StringLength(9)]
+        public string END_CEP { get; set; } = String.Empty;
+
+        [Required(ErrorMessage = "O logradouro é obrigatório.")]
+        [StringLength(150)]
+        public string END_LOG { get; set; } = String.Empty;
+
+        [Required(ErrorMessage = "O número é obrigatório.")]
+        [StringLength(10)]
+        public string END_NUM { get; set; } = String.Empty;
+
+        [StringLength(50)]
+        public string? END_CPL { get; set; }
+
+        [Required(ErrorMessage = "O bairro é obrigatório.")]
+        [StringLength(100)]
+        public string END_BAI { get; set; } = String.Empty;
+
+        [Required(ErrorMessage = "A cidade é obrigatória.")]
+        [StringLength(100)]
+        public string END_CID { get; set; } = String.Empty;
+
+        [Required(ErrorMessage = "O estado é obrigatório.")]
+        [StringLength(2)]
+        public string END_EST { get; set; } = String.Empty;
+    } 
 }
