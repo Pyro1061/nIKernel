@@ -68,7 +68,7 @@
                                     <a asp-page="Editar" asp-route-id="@cliente.CL_id" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i> Atualizar </a>
                                 }
                                 @if (podeDeletar) {
-                                    <form method="post" asp-page-handler="Deletar" asp-route-id="@cliente.CL_id"  class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este cliente? Esta ação não pode ser desfeita.');">
+                                    <form method="post" asp-page-handler="Deletar" asp-route-id="@cliente.CL_id"  class="d-inline" onsubmit="return confirm('Tem certeza de que deseja excluir este cliente? Todos os endereços vinculados a ele também serão removidos. Esta ação não poderá ser desfeita.');">
                                         <button type="submit" class="btn btn-sm btn-outline-danger ms-1"><i class="bi bi-trash"></i> Deletar</button>
                                     </form>
                                 }
