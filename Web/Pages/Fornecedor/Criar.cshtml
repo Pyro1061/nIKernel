@@ -16,7 +16,7 @@
                 @Html.AntiForgeryToken()
                 <div class="row g-3">
                     <div class="col-md-6">
-                        <label class="form-label" asp-for="Fornecedor_NomeFantasia">Nome Fantasia</label>
+                        <label class="form-label" asp-for="Fornecedor.NomeFantasia">Nome Fantasia</label>
                         <input asp-for="Fornecedor.NomeFantasia" class="form-control" placeholder="Ex: Tech Soluções" />
                         <span asp-validation-for="Fornecedor.NomeFantasia" class="text-danger"></span>
                     </div>
