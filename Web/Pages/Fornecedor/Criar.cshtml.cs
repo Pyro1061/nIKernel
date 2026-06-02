@@ -20,8 +20,21 @@ namespace nIKernel.Pages.Fornecedor
 
         public string? ErrorMessage { get; set; }
 
+        public IActionResult OnGet()
+        {
+            var claim = User.FindFirst("Permissao_Fornecedores")?.Value;
+            if (string.IsNullOrEmpty(claim) || claim.Split(',')[1] != "S")
+                return RedirectToPage("/Index");
+
+            return Page();
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
+            var claim = User.FindFirst("Permissao_Fornecedores")?.Value;
+            if (string.IsNullOrEmpty(claim) || claim.Split(',')[1] != "S")
+                return RedirectToPage("/Index");
+
             if (!ModelState.IsValid)
             {
                 return Page();

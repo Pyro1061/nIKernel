@@ -2,12 +2,22 @@
 @model Web.Pages.Admin.Produtos.IndexModel
 @{
     ViewData["Title"] = "Produtos";
+
+    var claimProdutos = User.FindFirst(type: "Permissao_Produtos")?.Value;
+    var permissoes = string.IsNullOrEmpty(claimProdutos)
+        ? new string[] { "N", "N", "N", "N" }
+        : claimProdutos.Split(',');
+    bool podeInserir = permissoes.Length > 1 && permissoes[1].Trim().ToUpper() == "S";
+    bool podeAtualizar = permissoes.Length > 2 && permissoes[2].Trim().ToUpper() == "S";
+    bool podeDeletar = permissoes.Length > 3 && permissoes[3].Trim().ToUpper() == "S";
 }
 
 <a href="/" class="btn btn-primary m-2">Voltar para menu</a>
 
 <h1>Produtos</h1>
-<a asp-page="Criar" class="btn btn-primary mb-2">Novo Produto</a>
+@if (podeInserir) {
+    <a asp-page="Criar" class="btn btn-primary mb-2">Novo Produto</a>
+}
 
 <table class="table table-striped">
     <thead>
@@ -30,12 +40,14 @@
             <td>@produto.prd_preco_venda.ToString("C")</td>
             <td>@(produto.prd_ativo == "S" ? "Sim" : "Não")</td>
             <td>
-                <a asp-page="Editar" asp-route-id="@produto.prd_id" class="btn btn-sm btn-warning">Editar</a>
-                <!--
-                <form method="post" asp-page-handler="Deletar" asp-route-id="@produto.prd_id" style="display:inline">
-                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Deseja excluir este produto?');">Excluir</button>
-                </form>
-                -->
+                @if (podeAtualizar) {
+                    <a asp-page="Editar" asp-route-id="@produto.prd_id" class="btn btn-sm btn-warning">Editar</a>
+                }
+                @if (podeDeletar) {
+                    <form method="post" asp-page-handler="Deletar" asp-route-id="@produto.prd_id" style="display:inline">
+                        <button type="submit" class="btn btn-sm btn-danger ms-1" onclick="return confirm('Deseja excluir este produto?');">Excluir</button>
+                    </form>
+                }
             </td>
         </tr>
     }

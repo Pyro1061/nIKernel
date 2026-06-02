@@ -20,12 +20,20 @@ namespace nIKernel.Pages.Fornecedor
 
         public async Task<IActionResult> OnGetAsync()
         {
+            var claim = User.FindFirst("Permissao_Fornecedores")?.Value;
+            if (string.IsNullOrEmpty(claim) || claim.Split(',')[0] != "S")
+                return RedirectToPage("/Index");
+
             ListaFornecedores = await _FornecedorRepo.GetAllAsync();
             return Page();
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(int id)
         {
+            var claim = User.FindFirst("Permissao_Fornecedores")?.Value;
+            if (string.IsNullOrEmpty(claim) || claim.Split(',')[3] != "S")
+                return RedirectToPage("/Index");
+
             await _FornecedorRepo.DeleteAsync(id);
             return RedirectToPage();
         }

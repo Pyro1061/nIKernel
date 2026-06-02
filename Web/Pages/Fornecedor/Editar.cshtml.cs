@@ -22,6 +22,10 @@ namespace nIKernel.Pages.Fornecedor
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
+            var claim = User.FindFirst("Permissao_Fornecedores")?.Value;
+            if (string.IsNullOrEmpty(claim) || claim.Split(',')[2] != "S")
+                return RedirectToPage("/Index");
+
             var fornecedor = await _fornecedorRepository.GetByIdAsync(id);
             if (fornecedor == null)
             {
@@ -34,6 +38,10 @@ namespace nIKernel.Pages.Fornecedor
 
         public async Task<IActionResult> OnPostAsync()
         {
+            var claim = User.FindFirst("Permissao_Fornecedores")?.Value;
+            if (string.IsNullOrEmpty(claim) || claim.Split(',')[2] != "S")
+                return RedirectToPage("/Index");
+
             if (!ModelState.IsValid)
             {
                 return Page();
