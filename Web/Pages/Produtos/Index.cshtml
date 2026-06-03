@@ -1,4 +1,5 @@
 @page
+@using Web.Models.Produto
 @model Web.Pages.Admin.Produtos.IndexModel
 @{
     ViewData["Title"] = "Produtos";
@@ -14,42 +15,54 @@
 
 <a href="/" class="btn btn-primary m-2">Voltar para menu</a>
 
-<h1>Produtos</h1>
-@if (podeInserir) {
-    <a asp-page="Criar" class="btn btn-primary mb-2">Novo Produto</a>
-}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-box-seam"></i> Produtos</h2>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Código</th>
-            <th>Descrição</th>
-            <th>GTIN/EAN</th>
-            <th>Preço Venda</th>
-            <th>Ativo</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (var produto in Model.Produtos)
-    {
-        <tr>
-            <td>@produto.prd_cod</td>
-            <td>@produto.prd_descricao</td>
-            <td>@produto.prd_gtin_ean</td>
-            <td>@produto.prd_preco_venda.ToString("C")</td>
-            <td>@(produto.prd_ativo == "S" ? "Sim" : "Não")</td>
-            <td>
-                @if (podeAtualizar) {
-                    <a asp-page="Editar" asp-route-id="@produto.prd_id" class="btn btn-sm btn-warning">Editar</a>
-                }
-                @if (podeDeletar) {
-                    <form method="post" asp-page-handler="Deletar" asp-route-id="@produto.prd_id" style="display:inline">
-                        <button type="submit" class="btn btn-sm btn-danger ms-1" onclick="return confirm('Deseja excluir este produto?');">Excluir</button>
-                    </form>
-                }
-            </td>
-        </tr>
+    @if (podeInserir) {
+        <a asp-page="Criar" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Novo Produto</a>
     }
-    </tbody>
-</table>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <table class="table table-striped table-hover mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>Código</th>
+                    <th>Descrição</th>
+                    <th>GTIN/EAN</th>
+                    <th>Preço Venda</th>
+                    <th>Ativo</th>
+                    <th width="15%" class="text-end">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+            @if (!Model.Produtos.Any()) {
+                <tr>
+                    <td colspan="6" class="text-center py-4 texte-muted">Nenhum produto cadastrado.</td>
+                </tr>
+            } else {
+                foreach (var produto in Model.Produtos) {
+                    <tr>
+                        <td class="align-middle">@produto.prd_cod</td>
+                        <td class="align-middle">@produto.prd_descricao</td>
+                        <td class="align-middle">@produto.prd_gtin_ean</td>
+                        <td class="align-middle">@produto.prd_preco_venda.ToString("C")</td>
+                        <td class="align-middle">@(produto.prd_ativo == "S" ? "Sim" : "Não")</td>
+                        <td class="align-middle text-end">
+                            @if (podeAtualizar) {
+                                <a asp-page="Editar" asp-route-id="@produto.prd_id" class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i> Atualizar</a>
+                            }
+                            @if (podeDeletar) {
+                                <form method="post" asp-page-handler="Deletar" asp-route-id="@produto.prd_id" class="d-inline" onsubmit="return confirm('Deseja excluir este produto?');">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
