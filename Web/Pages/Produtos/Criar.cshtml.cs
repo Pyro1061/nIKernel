@@ -29,6 +29,11 @@ namespace Web.Pages.Admin.Produtos
 
         public async Task<IActionResult> OnPostAsync()
         {
+            // Permissão: Inserir
+            var claim = User.FindFirst("Permissao_Produtos")?.Value;
+            if (string.IsNullOrEmpty(claim) || claim.Split(',')[1] != "S")
+                return RedirectToPage("/Index");
+
             if (!ModelState.IsValid)
                 return Page();
             Produto.prd_data_criacao = System.DateTime.Now;

@@ -1,0 +1,64 @@
+@page
+@using nIKernel.Models.Fornecedor
+@model nIKernel.Pages.Fornecedor.IndexModel
+@{
+    ViewData["Title"] = "Gestão de Fornecedores";
+
+    var claimFornecedores = User.FindFirst(type: "Permissao_Fornecedores")?.Value;
+    var permissoes = string.IsNullOrEmpty(claimFornecedores)
+        ? new string[] { "N", "N", "N", "N" }
+        : claimFornecedores.Split(',');
+    bool podeInserir = permissoes.Length > 1 && permissoes[1].Trim().ToUpper() == "S";
+    bool podeAtualizar = permissoes.Length > 2 && permissoes[2].Trim().ToUpper() == "S";
+    bool podeDeletar = permissoes.Length > 3 && permissoes[3].Trim().ToUpper() == "S";
+}
+
+<a href="/" class="btn btn-primary m-2">Voltar para menu</a>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="bi bi-people"></i> Fornecedores</h2>
+
+    @if (podeInserir) {
+        <a asp-page="Criar" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Novo Fornecedor</a>
+    }
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body p-0">
+        <table class="table table-striped table-hover mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nome Fantasia</th>
+                    <th>CNPJ</th>
+                    <th>E-mail</th>
+                    <th width="15%" class="text-end">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.ListaFornecedores.Any()) {
+                    <tr>
+                        <td colspan="4" class="text-center py-4 texte-muted">Nenhum fornecedor cadastrado.</td>
+                    </tr>
+                } else {
+                    foreach (var item in Model.ListaFornecedores) {
+                        <tr>
+                            <td class="align-middle">@item.NomeFantasia</td>
+                            <td class="align-middle">@item.Cnpj</td>
+                            <td class="align-middle">@item.Email</td>
+                            <td class="align-middle text-end">
+                                @if (podeAtualizar) {
+                                    <a asp-page="Editar" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i> Atualizar</a>
+                                }
+                                @if (podeDeletar) {
+                                    <form method="post" asp-page-handler="Delete" asp-route-id="@item.Id" class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir este fornecedor?');">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Excluir</button>
+                                    </form>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

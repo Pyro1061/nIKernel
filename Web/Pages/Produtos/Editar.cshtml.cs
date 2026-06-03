@@ -32,6 +32,11 @@ namespace Web.Pages.Admin.Produtos
 
         public async Task<IActionResult> OnPostAsync()
         {
+            // Permissão: Editar
+            var claim = User.FindFirst("Permissao_Produtos")?.Value;
+            if (string.IsNullOrEmpty(claim) || claim.Split(',')[2] != "S")
+                return RedirectToPage("/Index");
+
             if (!ModelState.IsValid)
                 return Page();
                 
