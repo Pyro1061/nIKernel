@@ -54,6 +54,29 @@ namespace nIKernel.Repositories
     if (usuario == null)
         return null;
 
+    // Registra o usuário conectado
+    connection.Execute(@"
+        INSERT INTO TB_UCN_USUARIOS_CONECTADOS
+        (
+            USU_ID,
+            UCN_DTA_INC,
+            UCN_SESSION_ID,
+            UCN_AGT
+        )
+        VALUES
+        (
+            @USU_ID,
+            NOW(),
+            @SESSION,
+            @AGENTE
+        )
+    ", new
+    {
+        USU_ID = usuario.USU_ID,
+        SESSION = sessionId,
+        AGENTE = hostNavegador
+    });
+
     // =====================================================
     // VALIDA SENHA COM SHA256
     // =====================================================
