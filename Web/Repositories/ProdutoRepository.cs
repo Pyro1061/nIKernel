@@ -47,6 +47,9 @@ namespace Web.Repositories
                             (@prd_cod, @prd_gtin_ean, @prd_descricao, @prd_un_compra, @prd_un_venda, 
                              @prd_preco_compra, @prd_margem_venda, @prd_preco_venda, @prd_ativo, @prd_data_criacao)";
             await db.ExecuteAsync(sql, produto);
+            // Após o insert, obter o ID gerado e popular o modelo
+            var id = await db.ExecuteScalarAsync<int>("SELECT LAST_INSERT_ID();");
+            produto.prd_id = id;
         }
 
         public async Task AtualizarAsync(ProdutoModel produto)
