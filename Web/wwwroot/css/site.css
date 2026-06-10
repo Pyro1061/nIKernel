@@ -105,10 +105,13 @@ html, body {
 }
 
 /* Ajusta os badges (Ativo) para não ficarem gigantes */
-.badge {
-    font-size: 10px !important;
-    padding: 0.35em 0.65em;
-    font-weight: 600;
+.badge { 
+  display: inline-block; 
+  min-width: 70px; 
+  font-size: 11px !important; 
+  font-weight: 600; 
+  padding: 0.35rem 0.5rem; 
+  text-align: center; 
 }
 
 /* Ajusta os botões e inputs para acompanharem a escala */
