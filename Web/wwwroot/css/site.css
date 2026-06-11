@@ -142,3 +142,18 @@ input:-webkit-autofill:focus {
 .form-control:focus::placeholder {
     color: transparent;
 }
+
+
+/* botoes de ação no index */
+.acoes {
+    display: flex;
+    gap: 4px;
+}
+
+.acoes > * {
+    flex: 1;
+}
+
+.acoes .btn {
+    padding: 0.25rem 0.20rem !important;
+}
