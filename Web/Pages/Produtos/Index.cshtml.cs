@@ -14,21 +14,26 @@ namespace Web.Pages.Admin.Produtos
 
         public IEnumerable<ProdutoModel> Produtos { get; set; } = new List<ProdutoModel>();
 
+        [BindProperty(SupportsGet = true)]
+        public bool ApenasAtivos { get; set; } = true;
+
         public async Task<IActionResult> OnGetAsync()
         {
-            // Permissão: ajuste conforme sua lógica de claims
             var claim = User.FindFirst("Permissao_Produtos")?.Value;
             if (string.IsNullOrEmpty(claim) || claim.Split(',')[0] != "S")
                 return RedirectToPage("/Index");
 
-            Produtos = await _repo.ListarTodosAsync();
+            Produtos = await _repo.ListarTodosAsync(ApenasAtivos);
             return Page();
         }
 
         public async Task<IActionResult> OnPostDeletarAsync(int id)
         {
-            // Implemente o método DeletarAsync no ProdutoRepository se desejar exclusão
-            // await _repo.DeletarAsync(id);
+            var claim = User.FindFirst("Permissao_Produtos")?.Value;
+            if (string.IsNullOrEmpty(claim) || claim.Split(',')[3] != "S")
+                return RedirectToPage("/Index");
+
+            await _repo.DeletarAsync(id);
             return RedirectToPage();
         }
     }
