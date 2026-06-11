@@ -63,14 +63,17 @@
                                 }
                             </td> 
                             <td class="align-middle">@cliente.CL_data_inclusao</td>
-                            <td class="align-middle text-end">
+                            <td class="acoes">
                                 @if (podeAtualizar) {
-                                    <a asp-page="Editar" asp-route-id="@cliente.CL_id" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i> Atualizar </a>
+                                    <a asp-page="Editar" asp-route-id="@cliente.CL_id" class="btn btn-sm btn-outline-primary btn-acao"><i class="bi bi-pencil"></i> Atualizar </a>
                                 }
                                 @if (podeDeletar) {
-                                    <form method="post" asp-page-handler="Deletar" asp-route-id="@cliente.CL_id"  class="d-inline" onsubmit="return confirm('Tem certeza de que deseja excluir este cliente? Todos os endereços vinculados a ele também serão removidos. Esta ação não poderá ser desfeita.');">
-                                        <button type="submit" class="btn btn-sm btn-outline-danger ms-1"><i class="bi bi-trash"></i> Deletar</button>
-                                    </form>
+                                    <button type="button"
+                                            class="btn btn-sm btn-outline-danger ms-1 btn-deletar btn-acao"
+                                            data-id="@cliente.CL_id"
+                                            data-nome="@cliente.CL_nome">
+                                        <i class="bi bi-trash"></i> Excluir
+                                    </button>
                                 }
                             </td>
                         </tr>
@@ -81,3 +84,69 @@
     </div>
 </div>
 
+
+@* Modal de confirmação de exclusão *@
+<div class="modal fade" id="modalConfirmarExclusao" tabindex="-1" aria-labelledby="modalExclusaoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="modalExclusaoLabel">
+                    <i class="bi bi-exclamation-triangle"></i>
+                    Confirmar Exclusão
+                </h5>
+                <button type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                Deseja excluir o cliente
+                <strong id="modalNomeCliente"></strong>?
+                <p class="text-muted small mt-2 mb-0">
+                    Todos os endereços vinculados a este cliente também serão removidos.
+                    Esta ação não poderá ser desfeita.
+                </p>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <form id="formDeletar" method="post">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash"></i>
+                        Confirmar Exclusão
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    document.querySelectorAll('.btn-deletar').forEach(function (btn) {
+
+        btn.addEventListener('click', function () {
+
+            var id = this.dataset.id;
+            var nome = this.dataset.nome;
+
+            document.getElementById('modalNomeCliente').textContent = nome;
+
+            document.getElementById('formDeletar').action =
+                '?handler=Deletar&id=' + id;
+
+            var modal = new bootstrap.Modal(
+                document.getElementById('modalConfirmarExclusao')
+            );
+
+            modal.show();
+        });
+
+    });
+</script>
+}
