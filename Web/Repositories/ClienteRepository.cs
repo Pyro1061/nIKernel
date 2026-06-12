@@ -14,11 +14,27 @@ namespace nIKernel.Repositories
                 ?? throw new Exception("Connection string não encontrada");
         }
 
-        public async Task<IEnumerable<ClienteModel>> ListarTodosAsync()
+        public async Task<IEnumerable<ClienteModel>> ListarTodosAsync(bool apenasAtivos = true)
         {
             using var db = new MySqlConnection(_connectionString);
-            string sql = @"SELECT * FROM TB_CL_CLIENTES";
-            return await db.QueryAsync<ClienteModel>(sql);
+
+            string sql = @"
+                SELECT
+                    CL_id,
+                    CL_cpf_cnpj,
+                    CL_rg_ie,
+                    CL_nome,
+                    CL_apelido,
+                    CL_status,
+                    CL_data_inclusao
+                FROM tb_cl_clientes
+                WHERE (@ApenasAtivos = 0 OR  CL_status IN ('A', 'B'))
+                ORDER BY CL_nome";
+
+            return await db.QueryAsync<ClienteModel>(
+                sql,
+                new { ApenasAtivos = apenasAtivos ? 1 : 0 }
+            );
         }
 
         public async Task InserirAsync(ClienteModel cliente)
