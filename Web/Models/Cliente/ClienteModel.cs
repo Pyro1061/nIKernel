@@ -9,13 +9,20 @@ namespace nIKernel.Models.Cliente
     {
         public int CL_id {get; set;}
 
-        [Required(ErrorMessage = "A inserção do CPF ou CNPJ é obrigatória.")]
+        [Required(ErrorMessage = "CPF/CNPJ é obrigatório.")]
+        [StringLength(18, ErrorMessage = "CPF/CNPJ deve ter no máximo 18 caracteres.")]
         public string CL_cpf_cnpj {get; set;} = String.Empty;
 
+        [Required(ErrorMessage = "RG/EI é obrigatório.")]
+        [StringLength(9, ErrorMessage = "RG/EI deve ter no máximo 9 caracteres.")]
         public string CL_rg_ie {get; set;} = String.Empty;
 
+        [Required(ErrorMessage = "Nome é obrigatório.")]
+        [StringLength(100, ErrorMessage = "Nome deve ter no máximo 100 caracteres.")]
         public string CL_nome {get; set;} = String.Empty;
 
+        [Required(ErrorMessage = "Apelido é obrigatório.")]
+        [StringLength(100, ErrorMessage = "Apelido deve ter no máximo 100 caracteres.")]
         public string CL_apelido {get; set;} = String.Empty;
 
         [Required(ErrorMessage = "A inserção do Status atual do cliente é obrigatória.")]
