@@ -36,6 +36,16 @@
                         <option value="B">Bloqueado</option>
                     </select>
                 </div>
+                <div class="col-md-3 mb-3">
+                    <label asp-for="Cliente.CL_rg_ie" class="form-label fw-bold">RG/IE</label>
+                    <input asp-for="Cliente.CL_rg_ie" class="form-control" placeholder="00.000.000-0"/>
+                    <span asp-validation-for="Cliente.CL_rg_ie" class="text-danger small"></span>
+                </div>
+                <div class="col-md-2 mb-3">
+                    <label class="form-label fw-bold">Telefone</label>
+                    <input asp-for="Cliente.CL_telefone" class="form-control" placeholder="(11) 90000-0000" />
+                    <span asp-validation-for="Cliente.CL_telefone" class="text-danger small"></span>
+                </div>
             </div>
 
             <div class="row border-bottom pb-3 mb-3">
@@ -44,10 +54,10 @@
                     <input asp-for="Cliente.CL_cpf_cnpj" class="form-control" placeholder="00.000.000/0001-00"/>
                     <span asp-validation-for="Cliente.CL_cpf_cnpj" class="text-danger small"></span>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label asp-for="Cliente.CL_rg_ie" class="form-label fw-bold">RG/IE</label>
-                    <input asp-for="Cliente.CL_rg_ie" class="form-control" placeholder="00.000.000-0"/>
-                    <span asp-validation-for="Cliente.CL_rg_ie" class="text-danger small"></span>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">E-mail</label>
+                    <input asp-for="Cliente.CL_email" type="email" class="form-control" placeholder="contato@empresa.com" />
+                    <span asp-validation-for="Cliente.CL_email" class="text-danger small"></span>
                 </div>
             </div>
 

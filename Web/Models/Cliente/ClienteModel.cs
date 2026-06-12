@@ -29,6 +29,14 @@ namespace nIKernel.Models.Cliente
         [StringLength(1)]
         public string CL_status { get; set; } = "A";
 
+        [Required(ErrorMessage = "E-mail é obrigatório.")]
+        [EmailAddress(ErrorMessage = "Informe um e-mail válido.")]
+        public string CL_email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Telefone é obrigatório.")]
+        [StringLength(15, ErrorMessage = "Telefone deve ter no máximo 15 caracteres.")]
+        public string CL_telefone { get; set; } = string.Empty;
+
         public DateTime CL_data_inclusao {get; set;}
 
         // ENDEREÇO DE CLIENTE 

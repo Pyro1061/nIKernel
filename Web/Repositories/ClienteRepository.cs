@@ -26,6 +26,8 @@ namespace nIKernel.Repositories
                     CL_nome,
                     CL_apelido,
                     CL_status,
+                    CL_email,
+                    CL_telefone,
                     CL_data_inclusao
                 FROM tb_cl_clientes
                 WHERE (@ApenasAtivos = 0 OR  CL_status IN ('A', 'B'))
@@ -47,7 +49,7 @@ namespace nIKernel.Repositories
                 cliente.CL_status= "A";
             }
              
-            string sql = @"INSERT INTO TB_CL_CLIENTES (CL_cpf_cnpj, CL_rg_ie, CL_nome, CL_apelido, CL_status, CL_data_inclusao) VALUES (@CL_cpf_cnpj, @CL_rg_ie, @CL_nome, @CL_apelido, @CL_status, @CL_data_inclusao);
+            string sql = @"INSERT INTO TB_CL_CLIENTES (CL_cpf_cnpj, CL_rg_ie, CL_nome, CL_apelido, CL_status, CL_data_inclusao, CL_email, CL_telefone) VALUES (@CL_cpf_cnpj, @CL_rg_ie, @CL_nome, @CL_apelido, @CL_status, @CL_data_inclusao, @CL_email, @CL_telefone);
             SELECT LAST_INSERT_ID();";
 
             cliente.CL_id = await db.ExecuteScalarAsync<int>(sql, cliente);
@@ -83,7 +85,9 @@ namespace nIKernel.Repositories
                     CL_rg_ie = @CL_rg_ie, 
                     CL_nome = @CL_nome, 
                     CL_apelido = @CL_apelido,
-                    CL_status = @CL_status
+                    CL_status = @CL_status,
+                    CL_email = @CL_email,
+                    CL_telefone = @CL_telefone
                 WHERE CL_id = @CL_id";
             
             await db.ExecuteAsync(sql, cliente);
