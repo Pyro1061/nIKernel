@@ -15,6 +15,9 @@ namespace nIKernel.Pages.Clientes
         }
 
         public IEnumerable<ClienteModel> Clientes {get; set;} = new List<ClienteModel>();
+        [BindProperty(SupportsGet = true)]
+        public bool ApenasAtivos { get; set; } = true;
+
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -26,7 +29,7 @@ namespace nIKernel.Pages.Clientes
                 return RedirectToPage("/Index");
             }
 
-            Clientes = await _clienteRepo.ListarTodosAsync();
+            Clientes = await _clienteRepo.ListarTodosAsync(ApenasAtivos);
             return Page();
         }
         public async Task<IActionResult> OnPostDeletarAsync(int id)
