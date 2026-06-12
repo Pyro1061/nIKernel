@@ -17,12 +17,12 @@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="Cliente.CL_nome" class="form-label fw-bold">Nome Completo</label>
-                    <input asp-for="Cliente.CL_nome" class="form-control" />
+                    <input asp-for="Cliente.CL_nome" class="form-control" placeholder="Ex: Transportadora Rápida S/A"/>
                     <span asp-validation-for="Cliente.CL_nome" class="text-danger small"></span>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label asp-for="Cliente.CL_apelido" class="form-label fw-bold">Apelido</label>
-                    <input asp-for="Cliente.CL_apelido" class="form-control" />
+                    <input asp-for="Cliente.CL_apelido" class="form-control" placeholder="Ex: Trans Rápida" />
                     <span asp-validation-for="Cliente.CL_apelido" class="text-danger small"></span>
                 </div>
             </div>
@@ -41,12 +41,12 @@
             <div class="row border-bottom pb-3 mb-3">
                 <div class="col-md-6 mb-3">
                     <label asp-for="Cliente.CL_cpf_cnpj" class="form-label fw-bold">CPF/CNPJ</label>
-                    <input asp-for="Cliente.CL_cpf_cnpj" class="form-control" />
+                    <input asp-for="Cliente.CL_cpf_cnpj" class="form-control" placeholder="00.000.000/0001-00"/>
                     <span asp-validation-for="Cliente.CL_cpf_cnpj" class="text-danger small"></span>
                 </div>
                 <div class="col-md-6 mb-3">
                     <label asp-for="Cliente.CL_rg_ie" class="form-label fw-bold">RG/IE</label>
-                    <input asp-for="Cliente.CL_rg_ie" class="form-control" />
+                    <input asp-for="Cliente.CL_rg_ie" class="form-control" placeholder="00.000.000-0"/>
                     <span asp-validation-for="Cliente.CL_rg_ie" class="text-danger small"></span>
                 </div>
             </div>
@@ -55,22 +55,22 @@
             <div class="row">
                 <div class="col-md-5 mb-3">
                     <label asp-for="Cliente.END_LOG" class="form-label fw-bold">Logradouro</label>
-                    <input asp-for="Cliente.END_LOG" class="form-control"/>
+                    <input asp-for="Cliente.END_LOG" class="form-control" placeholder="Rua, Avenida, Travessa"/>
                     <span asp-validation-for="Cliente.END_LOG" class="text-danger small"></span>
                 </div>
                 <div class="col-md-3 mb-3">
                     <label asp-for="Cliente.END_CEP" class="form-label fw-bold">CEP</label>
-                    <input asp-for="Cliente.END_CEP" class="form-control" />
+                    <input asp-for="Cliente.END_CEP" class="form-control" placeholder="00000-000"/>
                     <span asp-validation-for="Cliente.END_CEP" class="text-danger small"></span>
                 </div>
                 <div class="col-md-2 mb-2">
                     <label asp-for="Cliente.END_NUM" class="form-label fw-bold">Número</label>
-                    <input asp-for="Cliente.END_NUM" class="form-control"/>
+                    <input asp-for="Cliente.END_NUM" class="form-control" placeholder="123"/>
                     <span asp-validation-for="Cliente.END_NUM" class="text-danger small"></span>
                 </div>
                 <div class="col-md-2 mb-2">
                     <label asp-for="Cliente.END_EST" class="form-label fw-bold">Estado</label>
-                    <input asp-for="Cliente.END_EST" class="form-control"/>
+                    <input asp-for="Cliente.END_EST" class="form-control" placeholder="SP"/>
                     <span asp-validation-for="Cliente.END_EST" class="text-danger small"></span>
                 </div>
             </div>
@@ -78,18 +78,18 @@
             <div class="row">
                 <div class="col-md-4 mb-2">
                     <label asp-for="Cliente.END_BAI" class="form-label fw-bold">Bairro</label>
-                    <input asp-for="Cliente.END_BAI" class="form-control"/>
+                    <input asp-for="Cliente.END_BAI" class="form-control"  placeholder="Centro"/>
                     <span asp-validation-for="Cliente.END_BAI" class="text-danger small"></span>
                 </div>
                  <div class="col-md-4 mb-3">
                     <label asp-for="Cliente.END_CPL" class="form-label fw-bold">Complemento</label>
-                    <input asp-for="Cliente.END_CPL" class="form-control" />
+                    <input asp-for="Cliente.END_CPL" class="form-control" placeholder="Bloco, Apt, Sala"/>
                     <span asp-validation-for="Cliente.END_CPL" class="text-danger small"></span>
                 </div>
                 
                 <div class="col-md-3 mb-3">
                     <label asp-for="Cliente.END_CID" class="form-label fw-bold">Cidade</label>
-                    <input asp-for="Cliente.END_CID" class="form-control"/>
+                    <input asp-for="Cliente.END_CID" class="form-control" placeholder="São Paulo"/>
                     <span asp-validation-for="Cliente.END_CID" class="text-danger small"></span>
                 </div>
             </div>
