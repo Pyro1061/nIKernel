@@ -34,6 +34,18 @@
                 <span asp-validation-for="Produto.prd_descricao" class="text-danger small"></span>
             </div>
 
+            <div class="mb-3">
+                <label asp-for="Produto.prd_ctg_id" class="form-label fw-bold">Categoria</label>
+                <select asp-for="Produto.prd_ctg_id" class="form-select">
+                    <option value="">-- Selecione --</option>
+                    @foreach (var c in Model.Categorias)
+                    {
+                        <option value="@c.ctg_id">@c.ctg_dcc</option>
+                    }
+                </select>
+                <span asp-validation-for="Produto.prd_ctg_id" class="text-danger small"></span>
+            </div>
+
             <div class="row">
                 <div class="col-md-4">
                     <label asp-for="Produto.prd_un_compra" class="form-label fw-bold">Unidade de Compra</label>

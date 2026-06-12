@@ -11,10 +11,17 @@ namespace Web.Pages.Admin.Produtos
     public class CriarModel : PageModel
     {
         private readonly ProdutoRepository _repo;
-        public CriarModel(ProdutoRepository repo) => _repo = repo;
+        private readonly CategoriaRepository _catRepo;
+        public CriarModel(ProdutoRepository repo, CategoriaRepository catRepo)
+        {
+            _repo = repo;
+            _catRepo = catRepo;
+        }
 
         [BindProperty]
         public ProdutoModel Produto { get; set; } = new ProdutoModel();
+
+        public IEnumerable<Web.Models.Categoria.CtgCategoriaModel> Categorias { get; set; } = new List<Web.Models.Categoria.CtgCategoriaModel>();
 
         public IActionResult OnGet()
         {
@@ -24,6 +31,7 @@ namespace Web.Pages.Admin.Produtos
                 return RedirectToPage("/Index");
             Produto.prd_ativo = "S";
             Produto.prd_data_criacao = System.DateTime.Now;
+            Categorias = _catRepo.ListarTodosAsync().GetAwaiter().GetResult();
             return Page();
         }
 

@@ -11,7 +11,12 @@ namespace Web.Pages.Admin.Produtos
     public class EditarModel : PageModel
     {
         private readonly ProdutoRepository _repo;
-        public EditarModel(ProdutoRepository repo) => _repo = repo;
+        private readonly CategoriaRepository _catRepo;
+        public EditarModel(ProdutoRepository repo, CategoriaRepository catRepo)
+        {
+            _repo = repo;
+            _catRepo = catRepo;
+        }
 
         [BindProperty]
         public ProdutoModel Produto { get; set; } = new ProdutoModel();
@@ -27,6 +32,7 @@ namespace Web.Pages.Admin.Produtos
             if (produto == null)
                 return RedirectToPage("Index");
             Produto = produto;
+            ViewData["Categorias"] = await _catRepo.ListarTodosAsync();
             return Page();
         }
 
@@ -38,7 +44,11 @@ namespace Web.Pages.Admin.Produtos
                 return RedirectToPage("/Index");
 
             if (!ModelState.IsValid)
+            {
+                ViewData["Categorias"] = await _catRepo.ListarTodosAsync();
                 return Page();
+            }
+                
                 
             // Recalcula o preco de venda caso a margem ou custo sofram alteracao
             Produto.prd_preco_venda = Produto.prd_preco_compra + (Produto.prd_preco_compra * (Produto.prd_margem_venda / 100));

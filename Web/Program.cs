@@ -13,6 +13,7 @@ builder.Services.AddScoped<PerfilRepository>();
 builder.Services.AddScoped<ClienteRepository>();
 builder.Services.AddScoped<FornecedorRepository>();
 builder.Services.AddScoped<Web.Repositories.ProdutoRepository>();
+builder.Services.AddScoped<Web.Repositories.CategoriaRepository>();
 
 // 2. AUTENTICAÇÃO: configura os cookies de segurança do site
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

@@ -52,5 +52,11 @@ namespace Web.Models.Produto
 
         [Display(Name = "Data de Criação")]
         public DateTime prd_data_criacao { get; set; }
+
+        [Display(Name = "Categoria")]
+        public int? prd_ctg_id { get; set; }
+
+        [Display(Name = "Categoria")]
+        public string prd_ctg_dcc { get; set; } = string.Empty;
     }
 }
