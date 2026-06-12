@@ -101,4 +101,6 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/for_cep-autocomplete.js" asp-append-version="true"></script>
 }

@@ -78,7 +78,7 @@
                                 @if (podeAtualizar) {
                                     <a asp-page="Editar" asp-route-id="@cliente.CL_id" class="btn btn-sm btn-outline-primary btn-acao"><i class="bi bi-pencil"></i> Atualizar </a>
                                 }
-                                @if (podeDeletar) {
+                                @if (podeDeletar && cliente.CL_status == "A") {
                                     <button type="button"
                                             class="btn btn-sm btn-outline-danger ms-1 btn-deletar btn-acao"
                                             data-id="@cliente.CL_id"
